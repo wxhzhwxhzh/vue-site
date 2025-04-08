@@ -19,13 +19,29 @@
       </div>
       <div class="footer-bottom">
         &copy; 2023 我的导航网站. 保留所有权利.
+        <p>{{ currentTime }}</p>
       </div>
     </footer>
   </template>
   
-  <script setup>
-  </script>
-  
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const currentTime = ref(new Date().toLocaleString());
+
+let timer;
+
+onMounted(() => {
+  timer = setInterval(() => {
+    currentTime.value = new Date().toLocaleString();
+  }, 1000);
+});
+
+onBeforeUnmount(() => {
+  clearInterval(timer);
+});
+</script>
+
   <style scoped>
   .footer {
     background-color: #2c3e50;

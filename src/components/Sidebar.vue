@@ -1,32 +1,35 @@
 <template>
-    <aside class="sidebar">
-      <div class="sidebar-header">分类</div>
-      <ul class="sidebar-menu">
-        <li v-for="category in categories" :key="category.id">
-          <a href="#" @click.prevent="selectCategory(category.id)">{{ category.name }}</a>
-        </li>
-      </ul>
-    </aside>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  
-  const categories = ref([
-    { id: 1, name: '前端开发' },
-    { id: 2, name: '后端开发' },
-    { id: 3, name: '移动开发' },
-    { id: 4, name: '数据库' },
-    { id: 5, name: 'DevOps' },
-    { id: 6, name: '设计工具' },
-  ]);
-  
-  const selectCategory = (id) => {
-    console.log('Selected category:', id);
-    // 这里可以触发父组件的事件或更新状态
-  };
-  </script>
-  
+  <aside class="sidebar">
+    <div class="sidebar-header">分类</div>
+    <ul class="sidebar-menu">
+      <li v-for="category in categories" :key="category.id">
+        <a href="#" @click.prevent="selectCategory(category.id)">{{ category.name }}</a>
+      </li>
+    </ul>
+  </aside>
+</template>
+
+<script setup>
+import { ref, defineEmits } from 'vue';
+
+const emit = defineEmits(['category-change'])
+
+const categories = ref([
+  { id: 1, name: '前端开发' },
+  { id: 2, name: '后端开发' },
+  { id: 3, name: '移动开发' },
+  { id: 4, name: '数据库' },
+  { id: 5, name: 'DevOps' },
+  { id: 6, name: '动漫相关' },
+]);
+
+const selectCategory = (id) => {
+  emit('category-change', id)
+};
+</script>
+
+
+
   <style scoped>
   .sidebar {
     width: 200px;

@@ -2,8 +2,8 @@
   <div class="app-container">
     <Navbar />
     <div class="main-content">
-      <Sidebar />
-      <MainContent />
+      <Sidebar @category-change="handleCategoryChange" />
+      <MainContent :currentCategory2="currentCategory" />
     </div>
     <Footer />
   </div>
@@ -14,6 +14,15 @@ import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
 import MainContent from './components/MainContent.vue'
 import Footer from './components/Footer.vue'
+
+import { ref, provide } from 'vue'
+const currentCategory = ref(null)
+// provide('currentCategory', currentCategory)
+
+const handleCategoryChange = (categoryId) => {
+  currentCategory.value = categoryId
+  console.log('Category changed:', categoryId)
+}
 </script>
 
 <style>
