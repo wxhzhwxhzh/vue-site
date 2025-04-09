@@ -3,7 +3,12 @@
     <Navbar />
     <div class="main-content">
       <Sidebar @category-change="handleCategoryChange" />
-      <MainContent :currentCategory2="currentCategory" />
+      <Suspense>
+        <template #fallback>
+          <div>加载中...</div>
+        </template>
+        <MainContent :currentCategory2="currentCategory" />
+      </Suspense>
     </div>
     <Footer />
   </div>
@@ -12,7 +17,7 @@
 <script setup>
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
-import MainContent from './components/MainContent.vue'
+import MainContent from './components/Maincontent.vue'
 import Footer from './components/Footer.vue'
 
 import { ref, provide } from 'vue'
